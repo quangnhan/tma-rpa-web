@@ -1,37 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-#customers {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
 
-#customers td, #customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
+{% extends 'base/base.html' %}
+{% block content %}
+<a href="{% url 'product_create' %}" class="btn btn-success">Create product</a>
+<a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
-
-#customers tr:hover {background-color: #ddd;}
-
-#customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
-}
-</style>
-</head>
-<body>
-
-<a href="{% url 'product_create' %}">Create product</a>
-<a href="{% url 'logout' %}">Logout</a>
-
-<table id="customers">
+<table class="table">
     <tr>
         <th>Product Code</th>
         <th>Product Name</th>
@@ -50,13 +23,12 @@
             <td>{{product.unit_price}}</td>
             <td>{{product.total_amount}}</td>
             <td>
-              <a href="{% url 'product_detail' product.id%}">Detail</a>
-              <a href="{% url 'product_update' product.id%}">Update</a>
-              <a href="{% url 'product_delete' product.id%}">Delete</a>
+              <a href="{% url 'product_detail' product.id%}" class="btn btn-primary">Detail</a>
+              <a href="{% url 'product_update' product.id%}" class="btn btn-warning">Update</a>
+              <a href="{% url 'product_delete' product.id%}" class="btn btn-danger">Delete</a>
             </td>
         </tr>
     {% endfor %}
 </table>
+{% endblock content %}
 
-</body>
-</html>

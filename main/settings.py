@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'products',
+
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -126,6 +128,8 @@ STATIC_ROOT = f'{BASE_DIR}/static'
 
 LOGIN_REDIRECT_URL = 'product_list'
 LOGOUT_REDIRECT_URL = 'login'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
