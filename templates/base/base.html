@@ -4,13 +4,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    {% if user.is_authenticated %}
-        <p>Hello {{user.username}}</p>
-        {% block content %}
-        {% endblock content %}
-    {% else %}
-        <p>Vui lòng đăng nhập.</p>
-        <a href="{% url 'login'%}" class="btn btn-primary">Log In</a>
-    {% endif %}
+    {% include 'base/header.html' %}
+    <div class="card-body">
+        <main class="justify-content-center align-items-center">
+            {% if user.is_authenticated or request.get_full_path == '/accounts/login/'%}
+                {% block content %}
+                {% endblock content %}
+            {% else %}
+                <p>Vui lòng đăng nhập.</p>
+                <a href="{% url 'login'%}" class="btn btn-primary">Log In</a>
+            {% endif %}
+        </main>
+    </div>
+    {% include 'base/footer.html' %}
 </body>
 </html>
