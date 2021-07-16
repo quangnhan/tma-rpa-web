@@ -2,7 +2,17 @@
 {% extends 'base/base.html' %}
 {% block content %}
 <div class="row">
-    <a href="{% url 'product_create' %}" class="btn btn-success">Create product</a>
+    <div class="col-10 row">
+        <div class="col-4">
+            <input class="form-control" id='input_search' placeholder="Produce Code (12345)" value="{{request.GET.code}}">
+        </div>
+        <div class="col-2">
+            <a id='btn_search' href="{% url 'product_list' %}" class="btn btn-primary ">Search</a>
+        </div>
+    </div>
+    <div class="col-2 float-left">
+        <a href="{% url 'product_create' %}" class="btn btn-success float-right">Create product</a>
+    </div>
 </div>
 
 <table class="mt-2 table">
@@ -31,5 +41,13 @@
         </tr>
     {% endfor %}
 </table>
+
+<script>
+    $('#input_search').change(function(){
+        var q = $('#input_search').val()
+        $('#btn_search').attr('href', "{% url 'product_list' %}" + "?code=" + q)
+        }
+    )
+</script>
 {% endblock content %}
 

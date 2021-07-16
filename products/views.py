@@ -8,6 +8,13 @@ class ProductListView(ListView):
     template_name = 'products/product_list.html'
     context_object_name = 'list_all_products' 
 
+    def get_queryset(self):
+        code = self.request.GET.get('code', None)
+        if code:
+            qs = Product.objects.filter(code=code)
+            return qs
+        return super().get_queryset()
+
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'products/product_detail.html'
