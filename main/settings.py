@@ -124,5 +124,8 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = f'{BASE_DIR}/static'
 
+LOGIN_REDIRECT_URL = 'product_list'
+LOGOUT_REDIRECT_URL = 'login'
+
 # Activate Django-Heroku.
 django_heroku.settings(locals())
