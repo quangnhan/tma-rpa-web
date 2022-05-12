@@ -22,7 +22,7 @@
         <th>Email</th>
         <th>Debt</th>
         <th>Due date</th>
-        <th>Overdued</th>
+        <th>Status</th>
         <th>Reminded</th>
         <th></th>
     </tr>
@@ -34,8 +34,10 @@
             <td>{{customer.debt}}</td>
             <td>{{customer.due_date}}</td>
             <td>
-                {% if customer.is_overdued == True %}
-                    <i class="fa-solid fa-x text-danger"></i>   
+                {% if customer.status == "overdue" %}
+                    <p class="text-danger">{{customer.status}}</p>  
+                {% else %}
+                    <p class="text-success">{{customer.status}}</p>  
                 {% endif %}
             </td>
             <td>
