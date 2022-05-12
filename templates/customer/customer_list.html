@@ -1,0 +1,64 @@
+
+{% extends 'base/base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-10 row">
+        <div class="col-4">
+            <input class="form-control" id='input_search' placeholder="Name (Nathan)" value="{{request.GET.cmnd}}">
+        </div>
+        <div class="col-2">
+            <a id='btn_search' href="{% url 'customer_list' %}" class="btn btn-primary ">Search</a>
+        </div>
+    </div>
+    <div class="col-2 float-left">
+        <a href="{% url 'customer_create' %}" class="btn btn-success float-right">Create customer</a>
+    </div>
+</div>
+
+<table class="mt-2 table">
+    <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Debt</th>
+        <th>Due date</th>
+        <th>Overdued</th>
+        <th>Reminded</th>
+        <th></th>
+    </tr>
+    {% for customer in list_all_customer %}
+        <tr>
+            <td>{{customer.name}}</td>
+            <td>{{customer.phone}}</td>
+            <td>{{customer.email}}</td>
+            <td>{{customer.debt}}</td>
+            <td>{{customer.due_date}}</td>
+            <td>
+                {% if customer.is_overdued == True %}
+                    <i class="fa-solid fa-x text-danger"></i>   
+                {% endif %}
+            </td>
+            <td>
+                {% if customer.is_reminded == True %}
+                    <i class="fa-solid fa-check text-success"></i>   
+                {% else %}
+                    <i class="fa-solid fa-x text-danger"></i> 
+                {% endif %}
+            </td>
+            <td>
+              <a href="{% url 'customer_update' customer.id%}" class="btn btn-warning">Update</a>
+              <a href="{% url 'customer_delete' customer.id%}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+<script>
+    $('#input_search').change(function(){
+        var q = $('#input_search').val()
+        $('#btn_search').attr('href', "{% url 'customer_list' %}" + "?cmnd=" + q)
+        }
+    )
+</script>
+{% endblock content %}
+

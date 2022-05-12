@@ -1,3 +1,5 @@
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.db import models
 from django.urls import reverse
 
@@ -13,3 +15,9 @@ class Product(models.Model):
 
     def get_absolute_url (self):
         return reverse('product_detail', args=[str(self.id)])
+
+#Signals
+@receiver(post_save, sender=Product)
+def post_save_create_or_update_product(sender, instance, created, **kwargs):
+    if created:
+        pass
