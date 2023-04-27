@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'products',
     'apartment',
     'debt_reminder',
+    'invoice',
 
     'crispy_forms',
 ]

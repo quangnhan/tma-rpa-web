@@ -1,0 +1,41 @@
+
+{% extends 'base/base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-12 float-left">
+        <a href="{% url 'invoice_create' %}" class="btn btn-success float-right">Create invoice</a>
+    </div>
+</div>
+
+<table class="mt-2 table">
+    <tr>
+        <th>Invoice No</th>
+        <th>Serial</th>
+        <th>PO/Contract No</th>
+        <th>Currency Code</th>
+        <th>VAT Code</th>
+        <th>Pretax Amt</th>
+        <th>Vat Amt</th>
+        <th>Total Amt</th>
+        <th>Action</th>
+    </tr>
+    {% for invoice in invoices %}
+        <tr>
+            <td>{{invoice.invoice_no}}</td>
+            <td>{{invoice.serial}}</td>
+            <td>{{invoice.po_contract_no}}</td>
+            <td>{{invoice.currency_code}}</td>
+            <td>{{invoice.vat_code}}</td>
+            <td>{{invoice.pretax_amt}}</td>
+            <td>{{invoice.vat_amt}}</td>
+            <td>{{invoice.total_amt}}</td>
+            <td>
+              <!-- <a href="{% url 'invoice_detail' invoice.id%}" class="btn btn-primary">Detail</a> -->
+              <a href="{% url 'invoice_update' invoice.id%}" class="btn btn-warning">Update</a>
+              <a href="{% url 'invoice_delete' invoice.id%}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock content %}
+
