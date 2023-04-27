@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  web:
+    depends_on:
+      - db
+    build: .
+    ports:
+      - 80:8000
+    environment:
+      - DJANGO_SETTINGS_MODULE=main.settings_dev
+    volumes:
+      - workflow-files:/tbot-server/workflow_files
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - db-data:/var/lib/postgresql/data
+volumes:
+  db-data:
+  workflow-files:
